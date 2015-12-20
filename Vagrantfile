@@ -1,6 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+
+VAGRANTFILE_API_VERSION = '2'
+Vagrant.require_version '>= 1.7.4'
+
+raise Vagrant::Errors::VagrantError.new, 'vagrant-vbguest is required' unless Vagrant.has_plugin?('vagrant-vbguest')
+
 Vagrant.configure(2) do |config|
   # キーを変えないようにする(Windows対策)
   config.ssh.insert_key = false
@@ -42,18 +48,18 @@ Vagrant.configure(2) do |config|
   end
   # プロビジョニング
   # プロビジョニングに最低限必要な物を事前にインストールする
-  config.vm.provision 'yum_install', type: 'shell' do |shell|
-  shell.inline = <<-SCRIPT
-      yum -y install wget git rsync || exit $?
-  SCRIPT
-end
+  config.vm.provision 'install_common', type: 'shell' do |shell|
+    shell.path = './shells/install_common.sh'
+  end
+  config.vm.provision 'install_chefdk', type: 'shell' do |shell|
+    shell.path = './shells/install_chefdk.sh'
+  end
+  config.vm.provision 'berks_vendor', type: 'shell' do |shell|
+    shell.privileged = false
+    shell.path = './shells/berks_vendor.sh'
+    shell.args = '/vagrant'
+  end
 
-# バージョン固定(0.10.0)したChefDKをインストールする
-config.vm.provision 'chefdk_install', type: 'shell' do |shell|
-shell.inline = <<-SCRIPT
-      rpm -q chefdk || curl -sL https://www.chef.io/chef/install.sh | bash -s -- -v 0.10.0 -P chefdk || exit $?
-SCRIPT
-end
 #  config.vm.provision 'chef_zero' do |chef|
 #  end
 end

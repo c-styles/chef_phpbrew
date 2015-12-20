@@ -51,6 +51,18 @@ Just include `chef_phpbrew` in your node's `run_list`:
 }
 ```
 
+#### Use Vagrant how this cookbook works
+
+```
+vagrant up
+```
+
+requires following Vagrant Plugins
+
+- [vagrant-vbguest](https://github.com/chef/vagrant-vbguest)
+
+
+
 Contributing
 ------------
 TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
