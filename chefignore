@@ -1,0 +1,4 @@
+.kitchen
+Vagrantfile
+Berksfile
+Berksfile.lock
