@@ -2,7 +2,7 @@
 # Cookbook Name:: chef_phpbrew
 # Recipe:: default
 #
-# Copyright 2015, YOUR_COMPANY_NAME
+# Copyright 2015, c-styles
 #
-# All rights reserved - Do Not Redistribute
+# MIT Lisence
 #

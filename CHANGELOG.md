@@ -5,7 +5,7 @@ This file is used to list changes made in each version of the chef_phpbrew cookb
 
 0.1.0
 -----
-- [your_name] - Initial release of chef_phpbrew
+- [c-styles] - Initial release of chef_phpbrew
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
