@@ -48,18 +48,23 @@ Vagrant.configure(2) do |config|
   end
   # プロビジョニング
   # プロビジョニングに最低限必要な物を事前にインストールする
-  config.vm.provision 'install_common', type: 'shell' do |shell|
+  config.vm.provision 'shell' do |shell|
+    shell.name = 'install_common'
     shell.path = './shells/install_common.sh'
   end
-  config.vm.provision 'install_chefdk', type: 'shell' do |shell|
+  config.vm.provision 'shell' do |shell|
+    shell.name = 'install_chefdk'
     shell.path = './shells/install_chefdk.sh'
   end
-  config.vm.provision 'berks_vendor', type: 'shell' do |shell|
+  config.vm.provision 'shell' do |shell|
     shell.privileged = false
+    shell.name = 'berks_vendor'
     shell.path = './shells/berks_vendor.sh'
     shell.args = '/vagrant'
   end
 
-#  config.vm.provision 'chef_zero' do |chef|
-#  end
+  config.vm.provision 'chef_zero' do |chef|
+    chef.install = false
+    chef.run_list = ['recipe[chef_phpbrew::default]']
+  end
 end
